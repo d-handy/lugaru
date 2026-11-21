@@ -1,0 +1,91 @@
+name: Bug report
+description: Something does not work as expected.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please fill in as much as you can.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear and concise description of the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps that lead to the problem.
+      placeholder: |
+        1. Build with `cmake -B build && cmake --build build`
+        2. Run `./build/lugaru`
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and console output
+      description: Paste relevant output. It is formatted as code automatically.
+      render: shell
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - Windows
+        - macOS
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Release version or output of `git rev-parse --short HEAD`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment details
+      description: Distribution, compiler and version, build type, relevant dependency versions.
+      placeholder: |
+        Ubuntu 26.04, g++ 15.2, CMake 3.31, RelWithDebInfo
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Suspected cause, workaround, screenshots, related issues.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the existing issues and this is not a duplicate.
+          required: true

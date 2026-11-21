@@ -1,0 +1,52 @@
+name: Build / tooling
+description: Build system, compiler warnings, CI, dependencies or developer tools.
+labels: ["build"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Build system
+        - Compiler warnings or errors
+        - CI
+        - Dependencies
+        - Developer tools (formatting, linting, analysis)
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is the problem or the desired improvement?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Commands that show the problem, if applicable.
+      render: shell
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Build output
+      description: Relevant warnings, errors or log excerpts.
+      render: shell
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, compiler and version, build tool versions.
+      placeholder: |
+        Ubuntu 26.04, g++ 15.2, CMake 3.31, Ninja 1.12
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution

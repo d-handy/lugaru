@@ -1,0 +1,52 @@
+name: Refactoring
+description: Improve the structure of existing code without changing its behaviour.
+labels: ["refactor"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Affected code
+      description: Files, modules, classes or functions.
+      placeholder: "e.g. Source/Math/XYZ.hpp"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current problem
+      description: What is wrong with the code today? (e.g. duplication, unclear ownership, global state, unsafe memory handling)
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Target structure or technique, e.g. "replace raw pointers with references".
+    validations:
+      required: true
+
+  - type: textarea
+    id: verification
+    attributes:
+      label: How is unchanged behaviour verified?
+      description: Existing or new tests, manual checks, comparison of output or screenshots.
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks and scope
+      description: What could break? Can the work be split into smaller steps?
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: This change is not intended to alter observable behaviour.
+          required: true
+        - label: I searched the existing issues and this is not a duplicate.
+          required: true
