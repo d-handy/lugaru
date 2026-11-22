@@ -1,4 +1,6 @@
 # Lugaru – Modernization Fork
+[![Build](https://github.com/d-handy/lugaru/actions/workflows/build.yml/badge.svg)](https://github.com/d-handy/lugaru/actions/workflows/build.yml)
+
 
 A personal fork of the open source game [Lugaru](https://github.com/osslugaru/lugaru),
 used to learn modern C++ by refactoring a real-world codebase step by step.
