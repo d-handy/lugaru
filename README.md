@@ -1,68 +1,34 @@
-# Lugaru HD
+# Lugaru – Modernization Fork
 
-[![build status](https://gitlab.com/osslugaru/lugaru/badges/master/build.svg)](https://gitlab.com/osslugaru/lugaru/commits/master)
+A personal fork of the open source game [Lugaru](https://github.com/osslugaru/lugaru),
+used to learn modern C++ by refactoring a real-world codebase step by step.
 
-This repository holds the official development effort of the open source game
-Lugaru (and in particular of its HD version) for Linux, Mac OSX and Windows.
+## About this fork
 
-Developments from various forks have been integrated in the same code base in
-an attempt to get a unified game to further develop (e.g. with new features,
-new target platforms and new campaigns) and distribute.
+This repository is a fork of the open source game Lugaru, developed by Wolfire Games in 2005. I mainly forked it to dive deeper into C++ and practice my refactoring skills.
 
-This is the same game as the one distributed by Wolfire Games on
-[Lugaru HD's website](http://www.wolfire.com/lugaru), though this repository
-contains some further developments which are not (yet) featured in the
-commercial version.
+## Goals
 
-## Project links
+As it is mainly a practice project, I do not have a clear vision or deadline. I will certainly upgrade to C++20 (to explore its new features), implement tests and CI, and a modern OpenGL renderer. After that, I will focus on skills relevant to my own profession (software development in the geosciences), such as processing digital elevation models and large rasters, and making C++ tools usable from Python.
 
-This project is community-driven and uses the following communication channels:
-- GitLab repository (including issues): https://gitlab.com/osslugaru/lugaru
-- Project website: https://osslugaru.gitlab.io
-- Mailing list: http://icculus.org/mailman/listinfo/lugaru
-- IRC channel: [#lugaru on Freenode](http://webchat.freenode.net/?channels=lugaru)
+## Status
 
-## The game
+Early stage: builds and runs like upstream; tooling is being set up.
 
-Lugaru (pronounced Loo-GAH-roo) is a cross-platform third-person action game.
-The main character, Turner, is an anthropomorphic rebel bunny rabbit with
-impressive combat skills. In his quest to find those responsible for
-slaughtering his village, he uncovers a far-reaching conspiracy involving the
-corrupt leaders of the rabbit republic and the starving wolves from a nearby
-den. Turner takes it upon himself to fight against their plot and save his
-fellow rabbits from slavery.
+## Building
 
-## History
+Dependencies are listed in [COMPILING.md](COMPILING.md). On Linux:
 
-Lugaru was originally developed by David Rosen of [Wolfire Games](http://www.wolfire.com)
-and was [open sourced in 2010](http://blog.wolfire.com/2010/05/Lugaru-goes-open-source).
-It was made cross-platform with the help of [Ryan C. Gordon](http://icculus.org).
+```bash
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+cmake --build build
+./build/lugaru
+```
 
-Various forks were made at that time, and the most interesting developments
-were put back together under the OSS Lugaru organization, originally on
-[Google Code](https://code.google.com/p/lugaru) and then on
-[Bitbucket](https://bitbucket.org/osslugaru/lugaru).
+## Contributing
 
-This new repository on [GitLab](https://gitlab.com/osslugaru/lugaru) is run
-by the same team, and aims at revitalizing the development effort to clean
-things up, ensuring the code base builds and runs fine on all supported
-platforms, and easing the packaging of Lugaru in Linux distributions.
+Right now, I welcome helpful contributions and discussions. Please open an issue before opening a pull request, and keep in mind that this fork mainly exists to practice refactoring and explore modern C++.
 
-Ideally, the updated code base could also be used to update the Lugaru HD
-version sold by Wolfire Games once proven better than the current commercial
-builds.
+## License and credits
 
-## Compiling
-
-See the `COMPILING.md` for compilation instructions on all supported
-platforms.
-
-## Licensing
-
-The source code is distributed under the GNU General Public License version 2
-or (at your option) any later version (GPLv2+).
-
-The assets (campaigns, graphical and audio assets, etc.) in the `Data` folder
-are distributed under the Creative Commons Attribution - Share Alike license,
-some in version 3.0 Unported (CC-BY-SA 3.0) and others in version 4.0
-International (CC-BY-SA 4.0) as described in the `CONTENT-LICENSE.txt` file.
+Code: GPL-2.0-or-later ([COPYING.txt](COPYING.txt)) · Assets: CC-BY-SA ([CONTENT-LICENSE.txt](CONTENT-LICENSE.txt)) · Original: Wolfire Games / [osslugaru](https://github.com/osslugaru/lugaru) · Original README: [Docs/README-upstream.md](Docs/README-upstream.md)
