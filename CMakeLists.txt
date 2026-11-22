@@ -257,6 +257,13 @@ else()
 endif()
 
 
+### Data files
+
+# Creates a symbolic link to the Data directory in the build directory,
+# so that the game can find its data files when run from the build directory.
+file(CREATE_LINK ${CMAKE_SOURCE_DIR}/Data ${CMAKE_CURRENT_BINARY_DIR}/Data SYMBOLIC)
+
+
 ### Installation
 
 if(NOT CMAKE_INSTALL_PREFIX AND WIN32)
