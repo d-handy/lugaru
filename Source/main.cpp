@@ -193,6 +193,11 @@ bool SetUp()
     }
     if (!LoadSettings()) {
         fprintf(stderr, "Failed to load config, creating default\n");
+        SDL_DisplayMode desktop;
+        if (SDL_GetDesktopDisplayMode(0, &desktop) == 0) {
+            newscreenwidth = kContextWidth = desktop.w;
+            newscreenheight = kContextHeight = desktop.h;
+        }
         SaveSettings();
     }
 
