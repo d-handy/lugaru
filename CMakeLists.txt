@@ -227,16 +227,6 @@ find_package(JPEG REQUIRED)
 pkg_check_modules(VORBISFILE vorbisfile REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp REQUIRED)
 
-include_directories(
-    ${OPENAL_INCLUDE_DIR}
-    ${JPEG_INCLUDE_DIR}
-    ${PNG_INCLUDE_DIR}
-    ${OPENGL_INCLUDE_DIR}
-    ${SDL2_INCLUDE_DIRS}
-    ${VORBISFILE_INCLUDE_DIR}
-    ${JSONCPP_INCLUDE_DIRS}
-    ${CMAKE_SOURCE_DIR}/Source
-)
 
 set(LUGARU_LIBS ${OPENAL_LIBRARY} ${PNG_LIBRARY} ${JPEG_LIBRARY} ${SDL2_LIBRARIES} ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} ${VORBISFILE_LIBRARIES} ${JSONCPP_LIBRARIES} ${PLATFORM_LIBS})
 
@@ -247,14 +237,25 @@ add_executable(lugaru ${LUGARU_SRCS} ${LUGARU_H} ${LUGARU_OBJS})
 target_link_libraries(lugaru ${LUGARU_LIBS})
 
 if(WIN32)
-    add_definitions(-DBinIO_STDINT_HEADER=<stdint.h>)
+    target_compile_definitions(lugaru PRIVATE BinIO_STDINT_HEADER=<stdint.h>)
     if(MINGW)
         # An alternative would be to use _WIN32 consistently instead of WIN32
-        add_definitions(-DWIN32)
+        target_compile_definitions(lugaru PRIVATE WIN32)
     endif()
-else()
-    add_definitions(-DPLATFORM_LINUX=1 -DPLATFORM_UNIX=1 -DBinIO_STDINT_HEADER=<stdint.h>)
+else()  
+    target_compile_definitions(lugaru PRIVATE PLATFORM_LINUX=1 PLATFORM_UNIX=1 BinIO_STDINT_HEADER=<stdint.h>)
 endif()
+
+target_include_directories(lugaru PRIVATE
+    ${OPENAL_INCLUDE_DIR}
+    ${JPEG_INCLUDE_DIR}
+    ${PNG_INCLUDE_DIR}
+    ${OPENGL_INCLUDE_DIR}
+    ${SDL2_INCLUDE_DIRS}
+    ${VORBISFILE_INCLUDE_DIR}
+    ${JSONCPP_INCLUDE_DIRS}
+    ${CMAKE_SOURCE_DIR}/Source
+)
 
 
 ### Data files
@@ -317,7 +318,7 @@ endif()
 
 if(LINUX)
     if(SYSTEM_INSTALL)
-        add_definitions(-DDATA_DIR="${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}")
+        target_compile_definitions(lugaru PRIVATE DATA_DIR="${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME}")
         set(LUGARU_DOCDIR ${CMAKE_INSTALL_DOCDIR})
         install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/lugaru DESTINATION ${CMAKE_INSTALL_BINDIR})
         # Trailing '/' is significant, it installs and _renames_ Data/ as the destination folder
