@@ -238,6 +238,8 @@ bool SetUp()
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 8);
 
     Uint32 sdlflags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
     if (commandLineOptions[FULLSCREEN]) {
