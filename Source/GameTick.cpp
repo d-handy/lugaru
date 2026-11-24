@@ -1996,8 +1996,8 @@ void doAerialAcrobatics()
         Person::players[k]->turnspeed = 500;
 
         if ((Person::players[k]->isRun() &&
-             ((Person::players[k]->targetyaw != rabbitrunninganim &&
-               Person::players[k]->targetyaw != wolfrunninganim) ||
+             ((Person::players[k]->animTarget != rabbitrunninganim &&
+               Person::players[k]->animTarget != wolfrunninganim) ||
               Person::players[k]->frameTarget == 4)) ||
             Person::players[k]->animTarget == removeknifeanim ||
             Person::players[k]->animTarget == crouchremoveknifeanim ||
