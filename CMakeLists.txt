@@ -22,8 +22,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 message(STATUS "CMake build type: ${CMAKE_BUILD_TYPE}")
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-parentheses -pedantic --std=gnu++11 ${CMAKE_CXX_FLAGS}")
-
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-parentheses -pedantic ${CMAKE_CXX_FLAGS}")
 if(APPLE)
     set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for OSX")
     set(CMAKE_OSX_DEPLOYMENT_TARGET "10.11" CACHE STRING
@@ -235,6 +234,8 @@ set(LUGARU_LIBS ${OPENAL_LIBRARY} ${PNG_LIBRARY} ${JPEG_LIBRARY} ${SDL2_LIBRARIE
 
 add_executable(lugaru ${LUGARU_SRCS} ${LUGARU_H} ${LUGARU_OBJS})
 target_link_libraries(lugaru ${LUGARU_LIBS})
+target_compile_features(lugaru PRIVATE cxx_std_20)
+set_target_properties(lugaru PROPERTIES CXX_EXTENSIONS OFF)
 
 if(WIN32)
     target_compile_definitions(lugaru PRIVATE BinIO_STDINT_HEADER=<stdint.h>)

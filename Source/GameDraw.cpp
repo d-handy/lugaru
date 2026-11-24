@@ -263,8 +263,7 @@ int Game::DrawGLScene(StereoSide side)
 
         // Move the camera for the current eye's point of view.
         // Reverse the movement if we're reversing stereo
-        glTranslatef((stereoseparation / 2) * side * (stereoreverse ? -1 : 1), 0, 0);
-
+        glTranslatef((stereoseparation / 2) * static_cast<float>(side) * (stereoreverse ? -1 : 1), 0, 0);
         //camera effects
         if (!cameramode && !freeze && !winfreeze) {
             //shake
