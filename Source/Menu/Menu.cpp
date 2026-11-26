@@ -379,9 +379,9 @@ void Menu::Load()
         case 1:
         case 2:
             addImage(0, Mainmenuitems[0], 150, 480 - 128, 256, 128);
-            addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], 18, 480 - 152 - 32, 128, 32);
-            addButtonImage(2, Mainmenuitems[2], 18, 480 - 228 - 32, 112, 32);
-            addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], 18, 480 - 306 - 32, mainmenu == 1 ? 68 : 132, 32);
+            addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], 40, 480 - 232 - 32, 128, 32);
+            addButtonImage(2, Mainmenuitems[2], 40, 480 - 274 - 32, 128, 32);
+            addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], 40, 480 - 316 - 32, 128, 32);
             addLabel(-1, VERSION_NUMBER + VERSION_SUFFIX, 640 - 100, 10);
             break;
         case 3:
