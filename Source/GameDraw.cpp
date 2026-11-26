@@ -1309,7 +1309,7 @@ int Game::DrawGLScene(StereoSide side)
             text->glPrintOutlined(1024 / 30, 768 * 6 / 8, string, 1, 2, 1024, 768);
 
             string = "Press Escape to return to menu or Space to continue";
-            text->glPrintOutlined(640 / 2 - string.size() * 5, 480 * 1 / 16, string, 1, 1, 640, 480);
+            text->glPrintOutlined(640 / 2 - string.size() * 5, Menu::gridHeight * 1 / 16, string, 1, 1, 640, Menu::gridHeight);
 
             int wontime = (int)round(wonleveltime);
             string = "Time:      " + to_string(int((wontime - wontime % 60) / 60));
@@ -1696,7 +1696,7 @@ void DrawMenu()
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
-    glOrtho(0, Menu::gridWidth(), 0, 480, -100, 100);
+    glOrtho(0, Menu::gridWidth(), 0, Menu::gridHeight, -100, 100);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
