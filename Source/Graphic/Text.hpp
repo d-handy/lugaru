@@ -26,6 +26,7 @@ along with Lugaru.  If not, see <http://www.gnu.org/licenses/>.
 #include "Math/XYZ.hpp"
 #include "Utils/ImageIO.hpp"
 
+#include <array>
 #include <string>
 
 class Text
@@ -33,8 +34,11 @@ class Text
 public:
     Texture FontTexture;
     GLuint base;
+    std::array<float, 256> glyphAdvance{};
+    bool isProportional = false;
 
     void LoadFontTexture(const std::string& fileName);
+    void LoadGlyphAdvances(const std::string& fileName);
     void BuildFont();
     void glPrint(float x, float y, const std::string& string, int set, float size, float width, float height, int start = 0, int end = -1);
     void glPrintOutline(float x, float y, const std::string& string, int set, float size, float width, float height, int start = 0, int end = -1);
