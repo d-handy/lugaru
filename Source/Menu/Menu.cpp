@@ -256,14 +256,14 @@ void Menu::drawItems()
             case MenuItem::BUTTON:
                 glColor4f(it->r, it->g, it->b, 1);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                Game::text->glPrint(it->x, it->y, it->text.c_str(), 0, 1, gridWidth(), gridHeight);
+                Game::menutext->glPrint(it->x, it->y, it->text.c_str(), 0, 1, gridWidth(), gridHeight); 
                 if (it->type != MenuItem::LABEL) {
                     //mouseover highlight
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
                     for (int i = 0; i < 15; i++) {
                         if (1 - ((float)i) / 15 - (1 - it->effectfade) > 0) {
                             glColor4f(it->r, it->g, it->b, (1 - ((float)i) / 10 - (1 - it->effectfade)) * .25);
-                            Game::text->glPrint(it->x - ((float)i), it->y, it->text.c_str(), 0, 1 + ((float)i) / 70, gridWidth(), gridHeight);
+                            Game::menutext->glPrint(it->x - ((float)i), it->y, it->text.c_str(), 0, 1 + ((float)i) / 70, gridWidth(), gridHeight);
                         }
                     }
                 }

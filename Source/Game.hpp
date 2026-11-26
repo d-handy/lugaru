@@ -99,6 +99,8 @@ extern float mapradius;
 
 extern Text* text;
 extern Text* textmono;
+extern Text* menutext;
+
 extern float fps;
 
 extern bool editorenabled;
@@ -139,6 +141,7 @@ void deleteGame();
 
 void InitGame();
 void LoadStuff();
+
 void LoadScreenTexture();
 void LoadingScreen();
 int DrawGLScene(StereoSide side);
