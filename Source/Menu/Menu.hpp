@@ -65,6 +65,8 @@ public:
     static void setText(int id, const string& text);
     static void setText(int id, const string& text, int x, int y, int w, int h);
     static int getSelected(int mousex, int mousey);
+    static constexpr float gridHeight = 480;
+    static float gridWidth();
     static void drawItems();
 
     static void Load();
