@@ -91,6 +91,7 @@ float mapradius = 0;
 
 Text* text = NULL;
 Text* textmono = NULL;
+Text* menutext = NULL;
 float fps = 0;
 
 bool editorenabled = 0;

@@ -155,6 +155,15 @@ float Menu::gridWidth()
     }
     return gridHeight * screenwidth / screenheight;
 }
+int Menu::fromSpec(float px)
+{
+    return static_cast<int>(std::lround(px * gridHeight / 1080));
+}
+
+int Menu::fromSpecTop(float y, float h)
+{
+    return static_cast<int>(gridHeight) - fromSpec(y + h);
+}
 
 int Menu::getSelected(int mousex, int mousey)
 {
@@ -247,14 +256,14 @@ void Menu::drawItems()
             case MenuItem::BUTTON:
                 glColor4f(it->r, it->g, it->b, 1);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                Game::text->glPrint(it->x, it->y, it->text.c_str(), 0, 1, gridWidth(), gridHeight);
+                Game::menutext->glPrint(it->x, it->y, it->text.c_str(), 0, 1, gridWidth(), gridHeight); 
                 if (it->type != MenuItem::LABEL) {
                     //mouseover highlight
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
                     for (int i = 0; i < 15; i++) {
                         if (1 - ((float)i) / 15 - (1 - it->effectfade) > 0) {
                             glColor4f(it->r, it->g, it->b, (1 - ((float)i) / 10 - (1 - it->effectfade)) * .25);
-                            Game::text->glPrint(it->x - ((float)i), it->y, it->text.c_str(), 0, 1 + ((float)i) / 70, gridWidth(), gridHeight);
+                            Game::menutext->glPrint(it->x - ((float)i), it->y, it->text.c_str(), 0, 1 + ((float)i) / 70, gridWidth(), gridHeight);
                         }
                     }
                 }
@@ -386,10 +395,10 @@ void Menu::Load()
     switch (mainmenu) {
         case 1:
         case 2:
-            addImage(0, Mainmenuitems[0], 150, gridHeight - 128, 256, 128);
-            addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], 40, gridHeight - 232 - 32, 128, 32);
-            addButtonImage(2, Mainmenuitems[2], 40, gridHeight - 274 - 32, 128, 32);
-            addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], 40, gridHeight - 316 - 32, 128, 32);
+            addImage(0, Mainmenuitems[0], fromSpec(144), fromSpecTop(150, 250), fromSpec(760), fromSpec(250));
+            addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], fromSpec(144), fromSpecTop(520, 84), fromSpec(560), fromSpec(84));
+            addButtonImage(2, Mainmenuitems[2], fromSpec(144), fromSpecTop(616, 84), fromSpec(560), fromSpec(84));
+            addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], fromSpec(144), fromSpecTop(712, 84), fromSpec(560), fromSpec(84));
             addLabel(-1, VERSION_NUMBER + VERSION_SUFFIX, gridWidth() - 100, 10);
             break;
         case 3:

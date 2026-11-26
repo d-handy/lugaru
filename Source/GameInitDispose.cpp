@@ -99,6 +99,7 @@ void Game::newGame()
 {
     text = new Text();
     textmono = new Text();
+    menutext = new Text();
     skybox = new SkyBox();
 }
 
@@ -107,7 +108,7 @@ void Game::deleteGame()
     delete skybox;
     delete text;
     delete textmono;
-
+    delete menutext;
     glDeleteTextures(1, &screentexture);
     glDeleteTextures(1, &screentexture2);
 
@@ -533,6 +534,9 @@ void Game::InitGame()
     texdetail = 1;
     text->LoadFontTexture("Textures/Font.png");
     text->BuildFont();
+    menutext->LoadFontTexture("Textures/FontFiraSans.png");
+    menutext->LoadGlyphAdvances("Textures/FontFiraSans.json");
+    menutext->BuildFont();
     textmono->LoadFontTexture("Textures/FontMono.png");
     textmono->BuildFont();
     texdetail = temptexdetail;
@@ -637,11 +641,13 @@ void Game::LoadStuff()
     visibleloading = true;
 
     temptexdetail = texdetail;
-    texdetail = 1;
     text->LoadFontTexture("Textures/Font.png");
     text->BuildFont();
     textmono->LoadFontTexture("Textures/FontMono.png");
     textmono->BuildFont();
+    menutext->LoadFontTexture("Textures/FontFiraSans.png");
+    menutext->LoadGlyphAdvances("Textures/FontFiraSans.json");
+    menutext->BuildFont();
     texdetail = temptexdetail;
 
     viewdistdetail = 2;

@@ -21,6 +21,10 @@ along with Lugaru.  If not, see <http://www.gnu.org/licenses/>.
 #include "Graphic/Text.hpp"
 
 #include "Game.hpp"
+#include "Utils/Folders.hpp"
+
+#include <fstream>
+#include <json/reader.h>
 
 void Text::LoadFontTexture(const std::string& fileName)
 {
@@ -33,6 +37,18 @@ void Text::LoadFontTexture(const std::string& fileName)
         glDeleteLists(base, 512);
         base = 0;
     }
+}
+
+void Text::LoadGlyphAdvances(const std::string& fileName)
+{
+    std::ifstream file(Folders::getResourcePath(fileName));
+    Json::Value metrics;
+    file >> metrics;
+
+    for (int i = 0; i < 256; i++) {
+        glyphAdvance[i] = metrics["advance_px_at_glyph_px"][i].asFloat();
+    }
+    isProportional = true;
 }
 
 void Text::BuildFont() // Build Our Font Display List
@@ -48,16 +64,18 @@ void Text::BuildFont() // Build Our Font Display List
         base = 0;
     }
 
-    base = glGenLists(512); // Creating 256 Display Lists
+    base = glGenLists(512); // Creating 512 Display Lists
     FontTexture.bind();
-    for (loop = 0; loop < 512; loop++) { // Loop Through All 256 Lists
-        if (loop < 256) {
-            cx = float(loop % 16) / 16.0f; // X Position Of Current Character
-            cy = float(loop / 16) / 16.0f; // Y Position Of Current Character
-        } else {
-            cx = float((loop - 256) % 16) / 16.0f; // X Position Of Current Character
-            cy = float((loop - 256) / 16) / 16.0f; // Y Position Of Current Character
+    for (loop = 0; loop < 512; loop++) {
+        // Old fonts start their grid at the space character (code 32),
+        // proportional fonts store each glyph at its character code.
+        int cell = loop % 256;
+        if (isProportional) {
+            cell = (loop + 32) % 256;
         }
+        cx = float(cell % 16) / 16.0f; // X Position Of Current Character
+        cy = float(cell / 16) / 16.0f; // Y Position Of Current Character
+
         glNewList(base + loop, GL_COMPILE);                  // Start Building A List
         glBegin(GL_QUADS);                                   // Use A Quad For Each Character
         glTexCoord2f(cx, 1 - cy - 0.0625f + .001);           // Texture Coord (Bottom Left)
@@ -69,13 +87,17 @@ void Text::BuildFont() // Build Our Font Display List
         glTexCoord2f(cx, 1 - cy - +.001);                    // Texture Coord (Top Left)
         glVertex2i(0, 16);                                   // Vertex Coord (Top Left)
         glEnd();                                             // Done Building Our Quad (Character)
-        if (loop < 256) {
+
+        if (isProportional) {
+            // Advances are given in atlas pixels; a 64 px cell is drawn as 16 units.
+            glTranslated(glyphAdvance[cell] * 16.0 / 64.0, 0, 0);
+        } else if (loop < 256) {
             glTranslated(10, 0, 0); // Move To The Right Of The Character
         } else {
             glTranslated(8, 0, 0); // Move To The Right Of The Character
         }
         glEndList(); // Done Building The Display List
-    }                // Loop Until All 256 Are Built
+    }
 }
 
 void Text::_glPrint(float x, float y, const std::string& string, int set, float size, float width, float height, int start, int end, int offset) // Where The Printing Happens
