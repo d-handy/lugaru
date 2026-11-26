@@ -148,6 +148,11 @@ void Menu::setText(int id, const string& text, int x, int y, int w, int h)
     }
 }
 
+float Menu::gridWidth()
+{
+    return 640;
+}
+
 int Menu::getSelected(int mousex, int mousey)
 {
     for (vector<MenuItem>::reverse_iterator it = items.rbegin(); it != items.rend(); it++) {
@@ -239,20 +244,20 @@ void Menu::drawItems()
             case MenuItem::BUTTON:
                 glColor4f(it->r, it->g, it->b, 1);
                 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-                Game::text->glPrint(it->x, it->y, it->text.c_str(), 0, 1, 640, 480);
+                Game::text->glPrint(it->x, it->y, it->text.c_str(), 0, 1, gridWidth(), 480);
                 if (it->type != MenuItem::LABEL) {
                     //mouseover highlight
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
                     for (int i = 0; i < 15; i++) {
                         if (1 - ((float)i) / 15 - (1 - it->effectfade) > 0) {
                             glColor4f(it->r, it->g, it->b, (1 - ((float)i) / 10 - (1 - it->effectfade)) * .25);
-                            Game::text->glPrint(it->x - ((float)i), it->y, it->text.c_str(), 0, 1 + ((float)i) / 70, 640, 480);
+                            Game::text->glPrint(it->x - ((float)i), it->y, it->text.c_str(), 0, 1 + ((float)i) / 70, gridWidth(), 480);
                         }
                     }
                 }
                 break;
             case MenuItem::MAPLABEL:
-                Game::text->glPrintOutlined(0.9, 0, 0, 1, it->x, it->y, it->text.c_str(), 0, 0.6, 640, 480);
+                Game::text->glPrintOutlined(0.9, 0, 0, 1, it->x, it->y, it->text.c_str(), 0, 0.6, gridWidth(), 480);
                 break;
             case MenuItem::MAPLINE: {
                 XYZ linestart;
@@ -382,7 +387,7 @@ void Menu::Load()
             addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], 40, 480 - 232 - 32, 128, 32);
             addButtonImage(2, Mainmenuitems[2], 40, 480 - 274 - 32, 128, 32);
             addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], 40, 480 - 316 - 32, 128, 32);
-            addLabel(-1, VERSION_NUMBER + VERSION_SUFFIX, 640 - 100, 10);
+            addLabel(-1, VERSION_NUMBER + VERSION_SUFFIX, gridWidth() - 100, 10);
             break;
         case 3:
             addButton(0, "", 10 + 20, 440);
@@ -578,7 +583,7 @@ void Menu::Tick()
     }
 
     //menu buttons
-    selected = getSelected(mousecoordh * 640 / screenwidth, 480 - mousecoordv * 480 / screenheight);
+    selected = getSelected(mousecoordh * gridWidth() / screenwidth, 480 - mousecoordv * 480 / screenheight);
 
     // some specific case where we do something even if the left mouse button is not pressed.
     if ((mainmenu == 5) && (endgame == 2)) {

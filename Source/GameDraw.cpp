@@ -1696,7 +1696,7 @@ void DrawMenu()
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
-    glOrtho(0, 640, 0, 480, -100, 100);
+    glOrtho(0, Menu::gridWidth(), 0, 480, -100, 100);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
