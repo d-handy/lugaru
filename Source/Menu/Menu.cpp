@@ -155,6 +155,15 @@ float Menu::gridWidth()
     }
     return gridHeight * screenwidth / screenheight;
 }
+int Menu::fromSpec(float px)
+{
+    return static_cast<int>(std::lround(px * gridHeight / 1080));
+}
+
+int Menu::fromSpecTop(float y, float h)
+{
+    return static_cast<int>(gridHeight) - fromSpec(y + h);
+}
 
 int Menu::getSelected(int mousex, int mousey)
 {
@@ -386,10 +395,10 @@ void Menu::Load()
     switch (mainmenu) {
         case 1:
         case 2:
-            addImage(0, Mainmenuitems[0], 150, gridHeight - 128, 256, 128);
-            addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], 40, gridHeight - 232 - 32, 128, 32);
-            addButtonImage(2, Mainmenuitems[2], 40, gridHeight - 274 - 32, 128, 32);
-            addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], 40, gridHeight - 316 - 32, 128, 32);
+            addImage(0, Mainmenuitems[0], fromSpec(144), fromSpecTop(150, 250), fromSpec(760), fromSpec(250));
+            addButtonImage(1, Mainmenuitems[mainmenu == 1 ? 1 : 5], fromSpec(144), fromSpecTop(520, 84), fromSpec(560), fromSpec(84));
+            addButtonImage(2, Mainmenuitems[2], fromSpec(144), fromSpecTop(616, 84), fromSpec(560), fromSpec(84));
+            addButtonImage(3, Mainmenuitems[mainmenu == 1 ? 3 : 6], fromSpec(144), fromSpecTop(712, 84), fromSpec(560), fromSpec(84));
             addLabel(-1, VERSION_NUMBER + VERSION_SUFFIX, gridWidth() - 100, 10);
             break;
         case 3:
