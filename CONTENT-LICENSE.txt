@@ -37,6 +37,15 @@ Data/Textures/Quit.png
 Data/Textures/Resume.png
 Docs/banner_readme_2560x640@2x.png
 
+## Fira Sans (SIL Open Font License 1.1)
+
+Bitmap font atlas and glyph metrics generated from Fira Sans SemiBold
+by Mozilla and Carrois Apostrophe. The licence text is in
+Data/Textures/FontFiraSans-OFL.txt.
+
+Data/Textures/FontFiraSans.png
+Data/Textures/FontFiraSans.json
+
 ## Slib assets (CC-BY-SA 3.0 Unported)
 
 https://web.archive.org/web/20161213062413/http://forums.wolfire.com/viewtopic.php?f=7&t=1066
